@@ -1,0 +1,62 @@
+<%- include('../templates/site/_header') -%>
+
+	<body class="host_version">
+
+		<%- include('../templates/site/_loader') -%>
+
+
+			<%- include('../templates/site/_navbar') -%>
+
+
+				<div class="all-title-box">
+					<div class="container text-center">
+						<h1>FAQs<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+					</div>
+				</div>
+
+				<div id="contact" class="section wb">
+					<div class="container">
+						<div class="section-title text-center">
+							<h3>Need Help? Sure we are Online!</h3>
+							<p class="lead">Let us give you more details about the special offer website you want us. Please fill out
+								the form below. <br>We have million of website owners who happy to work with us!</p>
+						</div><!-- end title -->
+
+						<div class="container">
+							<div class="row">
+
+								<div class="offset-1 col-lg-10 col-md-10 col-10 mb-5">
+
+									<div class="row">
+
+										<% for(let i=0; i < faqs.length; i++) { %>
+											<div class="col-lg-5 col-md-5 col-5 mb-2 text-right">
+												<div class="accordion" id="accordionExample">
+													<div class="accordion-item">
+														<button class="btn btn-outline-info mb-2" type="button" data-bs-toggle="collapse"
+															data-bs-target="#faq<%= faqs[i]._id %>" aria-expanded="true" aria-controls="collapseOne">
+															<%= faqs[i].question %>
+														</button>
+
+														<div id="faq<%= faqs[i]._id %>" class="accordion-collapse collapse" aria-labelledby="headingOne"
+															data-bs-parent="#accordionExample">
+															<div class="accordion-body">
+																<%= faqs[i].answer %>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div><!-- end col -->
+											<% } %>
+									</div>
+									</div>
+								</div><!-- end row -->
+							</div><!-- end container -->
+						</div><!-- end section -->
+
+
+						<%- include('../templates/site/_footer') -%>
+
+	</body>
+
+	</html>

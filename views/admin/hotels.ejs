@@ -1,0 +1,179 @@
+<%- include('../templates/admin/_header') %>
+
+  <body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+      <%- include('../templates/admin/_sidebar') %>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+          <!-- Main Content -->
+          <div id="content">
+
+            <%- include('../templates/admin/_navbar') %>
+
+              <% if(adminUser) { %>
+
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                  <!-- Page Heading -->
+                  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard | Hotels</h1>
+                    <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                      data-target="#addHotel"><i class="fas fa-plus fa-sm text-white-50"></i> New Hotel!</button>
+                  </div>
+
+
+                  <!-- Content Row -->
+                  <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-12 mb-4">
+
+                      <!-- Project Card Example -->
+                      <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Hotels</h6>
+                        </div>
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Hotel Photo</th>
+                              <th scope="col">Hotel Name</th>
+                              <th scope="col">Hotel City</th>
+                              <th scope="col">Hotel Web</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            <% for(let i=0; i < hotels.length; i++) { %>
+                              <tr>
+                                <th scope="row">
+                                  <%= hotels[i]._id %>
+                                </th>
+                                <td>
+                                  <img width="80px" src="<%= hotels[i].image %>" alt="">
+                                </td>
+                                <td>
+                                  <%= hotels[i].name %>
+                                </td>
+                                <td>
+                                  <%= hotels[i].city %>
+                                </td>
+                                <td>
+                                  <%= hotels[i].webUrl %>
+                                </td>
+                                <td>
+                                  <a href="#" class="btn btn-outline-warning">
+                                    <i class="bi bi-pen"></i>
+                                  </a>
+                                  <a href="/hotels/<%= hotels[i]._id %>?_method=DELETE" class="btn btn-outline-danger">
+                                    <i class="bi bi-trash3"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                              <% } %>
+
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+
+
+
+
+                  </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+          </div>
+          <!-- End of Main Content -->
+
+          <!-- ADD -->
+
+          <div class="modal fade" id="addHotel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-body customer-box">
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="Login">
+                      <form method="POST" action="/hotels" class="form-horizontal" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <input type="text" name="name" class="form-control" placeholder="Hotel Name">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-5">
+                              <input type="text" name="city" class="form-control" placeholder="City">
+                            </div>
+
+                            <div class="col-sm-7">
+                              <input type="text" name="webUrl" class="form-control" placeholder="Web Url (https://...)">
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <textarea type="text" name="description" id="description" class="form-control" placeholder="Hotel Short Description" required></textarea>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <input type="file" name="image" class="form-control" placeholder="Hotel Photo">
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-outline-success rounded text-dark">
+                              Add New Hotel!
+                            </button>
+                            <button type="submit" class="btn btn-outline-danger rounded text-dark" data-dismiss="modal"
+                              aria-hidden="true">
+                              Cancel!
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADD END -->
+
+          <% } %>
+
+            <%- include('../templates/admin/_footer') %>
+
+
+  </body>
+
+  </html>

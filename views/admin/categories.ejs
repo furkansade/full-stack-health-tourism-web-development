@@ -1,0 +1,191 @@
+<%- include('../templates/admin/_header') %>
+
+  <body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+      <%- include('../templates/admin/_sidebar') %>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+          <!-- Main Content -->
+          <div id="content">
+
+            <%- include('../templates/admin/_navbar') %>
+
+            <% if(adminUser) { %>
+
+              <!-- Begin Page Content -->
+              <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                  <h1 class="h3 mb-0 text-gray-800">Dashboard | Categories</h1>
+                  <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                    data-target="#addCategory"><i class="fas fa-plus fa-sm text-white-50"></i> New Category!</a>
+                </div>
+
+
+                <!-- Content Row -->
+                <div class="row">
+
+                  <!-- Content Column -->
+                  <div class="col-lg-12 mb-4">
+
+                    <!-- Project Card Example -->
+                    <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Categories</h6>
+                      </div>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% for(let i=0; i < categories.length; i++) { %>
+                            <tr>
+                              <th scope="row">
+                                <%= categories[i]._id %>
+                              </th>
+                              <td>
+                                <%= categories[i].name %>
+                              </td>
+                              <td>
+                                <a class="btn btn-outline-warning" data-toggle="modal"
+                                  data-target="#updateCategory<%= categories[i]._id %>">
+                                  <i class="bi bi-pen"></i>
+                                </a>
+                                <a href="/categories/<%= categories[i]._id %>?_method=DELETE"
+                                  onclick="return confirm('Are you sure?')" class="btn btn-outline-danger">
+                                  <i class="bi bi-trash3"></i>
+                                </a>
+                              </td>
+
+                            </tr>
+
+
+                            <!-- UPDATE -->
+
+                            <div class="modal fade" id="updateCategory<%= categories[i]._id %>" tabindex="-1"
+                              role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-body customer-box">
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                      <div class="tab-pane active" id="Login">
+                                        <h2>Edit Category | <%= categories[i].name %>
+                                        </h2>
+                                        <form method="POST" action="/categories/<%= categories[i].slug %>?_method=PUT"
+                                          class="form-horizontal">
+
+
+                                          <div class="form-group mt-3 mb-4">
+                                            <div class="row">
+                                              <div class="col-sm-12">
+                                                <input type="text" name="name" class="form-control"
+                                                  placeholder="Category Name" value="<%= categories[i].name %>">
+                                              </div>
+                                            </div>
+                                          </div>
+
+
+                                          <div class="row">
+                                            <div class="col-sm-12 text-right">
+                                              <button type="submit" class="btn btn-outline-success rounded text-dark">
+                                                Update Category!
+                                              </button>
+                                              <button type="submit" class="btn btn-outline-danger rounded text-dark"
+                                                data-dismiss="modal" aria-hidden="true">
+                                                Cancel!
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- UPDATE END -->
+
+
+                            <% } %>
+
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+
+
+
+
+                </div>
+
+              </div>
+              <!-- /.container-fluid -->
+
+          </div>
+          <!-- End of Main Content -->
+
+
+          <!-- ADD -->
+
+          <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-body customer-box">
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="Login">
+                      <h2>New Category</h2>
+                      <form method="POST" action="/categories" class="form-horizontal">
+
+
+                        <div class="form-group mt-3 mb-4">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <input type="text" name="name" class="form-control" placeholder="Category Name">
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-outline-success rounded text-dark">
+                              Add Category!
+                            </button>
+                            <button type="submit" class="btn btn-outline-danger rounded text-dark" data-dismiss="modal"
+                              aria-hidden="true">
+                              Cancel!
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADD END -->
+
+          <% } %>
+
+          <%- include('../templates/admin/_footer') %>
+
+
+  </body>
+
+  </html>

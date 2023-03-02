@@ -1,0 +1,131 @@
+<%- include('../templates/site/_header') -%>
+
+  <body class="host_version">
+
+    <%- include('../templates/site/_loader') -%>
+
+
+      <%- include('../templates/site/_navbar') -%>
+
+      <% if(user) { %>
+
+      <% if(user.role === "Company" || user.role === "Admin") { %>
+
+        <div class="row py-5">
+          <div class="container">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <h2>
+                Create New Package!
+                <a href="/users/dashboard" class="btn btn-outline-primary float-right"><i class="fa fa-arrow-left"></i>
+                  Go back!</a>
+              </h2>
+              <hr>
+            </div>
+
+            <div class="row">
+              <div class="col-xl-12 col-md-12 col-sm-12">
+
+                      <div id="message"></div>
+
+                      <form method="POST" action="/healthpackages" enctype="multipart/form-data">
+
+                          <div class="form-row">
+                      
+                              <div class="form-group col-md-12">
+                                  <input type="text" name="title" id="title" class="form-control" placeholder="Package Title" required>
+                              </div>
+                      
+                          </div>
+
+                          <div class="form-row">
+                      
+                              <div class="form-group col-md-12">
+                                  <input type="hidden" name="role" class="form-control" value="<%= user.role %>">
+                              </div>
+                      
+                          </div>
+
+                          <div class="form-row">
+                              
+                            <div class="form-group col-md-6">
+                              <select class="form-control" name="category" id="category">
+                                <% for(let i= 0; i < categories.length; i++) { %>
+                                <option value="<%= categories[i]._id %>"><%= categories[i].name %></option> 
+                                <% } %>
+                            </select>
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                              <input type="text" name="doctorUrl" id="doctorUrl" class="form-control" placeholder="DoktorUzmani URL (https//...)">         
+                            </div>
+                            
+                        </div>
+
+                          <div class="form-row">
+                      
+                            <div class="form-group col-md-12">
+                                <textarea type="text" name="description" id="description" class="form-control" placeholder="Package Description" required></textarea>
+                            </div>
+                    
+                        </div>
+
+    
+                          
+                          <div class="form-row">
+                              
+                              <div class="form-group col-md-6">
+                                <select class="form-control" name="hotel" id="hotel">
+                                  <% for(let i= 0; i < hotels.length; i++) { %>
+                                    <option value="<%= hotels[i]._id %>"><%= hotels[i].name %></option> 
+                                    <% } %>
+                              </select>
+                              </div>
+                              
+                              <div class="form-group col-md-6">
+                                <select class="form-control" name="tour" id="tour">
+                                  <% for(let i= 0; i < tours.length; i++) { %>
+                                    <option value="<%= tours[i]._id %>"><%= tours[i].name %></option> 
+                                    <% } %>
+                              </select>
+                              </div>
+                              
+                          </div>
+                          
+                          <div class="form-row">
+                      
+                              <div class="form-group col-md-6">
+                                <input type="file" name="image" class="form-control-file" placeholder="Image" style="border: 1px solid #ced4da; border-radius: 0.25rem; padding: 0.15rem;" required>
+                              </div>
+
+                              <div class="form-group col-md-3">
+                                  <input type="text" name="oldPrice" id="oldPrice" class="form-control" placeholder="Old Price"> 
+                              </div>
+
+                              <div class="form-group col-md-3">
+                                  <input type="text" name="newPrice" id="newPrice" class="form-control" placeholder="New Price" required> 
+                              </div>
+                      
+                          </div>
+                      
+                          
+                         
+                          <button type="submit" class="btn btn-outline-success w-100 my-3">Save!</button>
+                        </form>
+
+                  </div>
+              </div><!-- end col -->
+          </div><!-- end row -->
+
+  
+        </div>
+
+        <% } %>
+        <% } %>
+
+
+        <%- include('../templates/site/_footer') -%>
+
+  </body>
+
+  </html>

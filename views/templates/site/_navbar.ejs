@@ -1,0 +1,55 @@
+<!-- Start header -->
+<header class="top-navbar">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" alt="" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbars-host">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item <%= pageName === 'index' && 'active' %>"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item <%= pageName === 'healthpackages' && 'active' %>"><a class="nav-link" href="/healthpackages">Health Packages</a></li>
+          <li class="nav-item <%= pageName === 'companies' && 'active' %>"><a class="nav-link" href="/companies">Companies</a></li>
+          
+          <li class="nav-item <%= pageName === 'blogs' && 'active' %>"><a class="nav-link" href="/blogs">Blogs</a></li>
+          <li class="nav-item <%= pageName === 'faq' && 'active' %>" ><a class="nav-link" href="/faqs">FAQ</a></li>
+          
+        </ul>
+
+        <% if(!userIN) { %>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a class="hover-btn-new log orange mr-2" href="/login">
+              <span><i class="fa fa-sign-in" aria-hidden="true"></i></span> 
+            </a></li>
+            <li><a class="hover-btn-new log orange" href="/register">
+              <span><i class="fa fa-user-plus" aria-hidden="true"></i></span>
+            </a></li>
+        </ul>
+        <% } %>
+        
+        <% if(userIN) { %>
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="<%= pageName === 'dashboard' && 'active' %>"><a class="hover-btn-new log orange mr-2" href="/users/dashboard">
+            <span><i class="bi bi-person-fill" aria-hidden="true"></i></span>
+          </a></li>
+
+
+          <li><a class="hover-btn-new log orange mr-2" href="/users/logout">
+            <span><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+          </a></li>
+        </ul>
+        <% } %>
+
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- End header -->
+
+

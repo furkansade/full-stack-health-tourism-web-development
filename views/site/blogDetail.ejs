@@ -1,0 +1,115 @@
+<%- include('../templates/site/_header') %>
+
+  <body class="host_version">
+
+    <%- include('../templates/site/_loader') %>
+
+
+      <%- include('../templates/site/_navbar') %>
+
+        <div class="all-title-box">
+          <div class="container text-center">
+            <h1>
+              <%= blog.title %><span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span>
+            </h1>
+          </div>
+        </div>
+
+        <div id="overviews" class="section wb">
+          <div class="container">
+            <div class="row mb-5">
+
+              <div class="offset-1 col-lg-10 blog-post-single mb-4">
+                <div class="blog-item">
+                  <div class="image-blog">
+                    <img src="<%= blog.image %>" alt="" class="img-fluid">
+                  </div>
+                  <div class="post-content">
+                    <div class="post-date">
+                      <a href="/blogs?categories=<%= blog.category.slug %>" style="text-transform: capitalize;" class="btn btn-info">
+                        <%= blog.category.name %>
+                      </a>
+                    </div>
+                    
+                        <div class="meta-info-blog">
+                          <span><i class="fa fa-calendar"></i> <a href="#">
+                              <%= blog.createdDate.getDate() %>.<%= blog.createdDate.getMonth() + 1 %>.<%=
+                                    blog.createdDate.getFullYear() %>
+                            </a> </span>
+                        </div>
+                        <div class="blog-title">
+                          <h2><a href="#" title="">
+                              <%= blog.title %>
+                            </a></h2>
+                        </div>
+
+                  </div>
+                </div>
+              </div><!-- end col -->
+
+              <div class="offset-1 col-lg-10 blog-post-single mb-4">
+
+                <%= blog.description %>
+
+              </div>
+              
+
+              
+            </div><!-- end container -->
+          </div><!-- end section -->
+
+          <!-- Related items section-->
+          <div class="row py-5 bg-light mt-5">
+            <div class="container px-4 px-lg-5 mt-5">
+              <h2 class="fw-bolder mb-4">Other Blogs</h2>
+              <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-left">
+
+                <% for(let i=0; i < blogs.length; i++) { %>
+                  <% if(blog.slug !=blogs[i].slug) { %>
+                    <div class="col-4 mb-5">
+                      <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge position-absolute" style="top: 0.3rem; right: 0.3rem">
+                          <a href="/blogs?categories=<%= blogs[i].category.slug %>" class="btn btn-sm btn-info">
+                            <%= blogs[i].category.name %>
+                          </a>
+                        </div>
+                        <!-- Product image-->
+                        <a href="/blogs/<%= blogs[i].slug %>">
+                          <img class="card-img-top" src="<%= blogs[i].image %>" style="height: 33vh;" alt="..." />
+                        </a>
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                          <div class="text-center">
+                            <!-- Product name-->
+                            <a href="/blogs/<%= blogs[i].slug %>" style="text-decoration: none; color: black;">
+                              <h5 class="fw-bolder">
+                                <%= blogs[i].title %>
+                              </h5>
+                            </a>
+
+
+                          </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                          <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                              href="/blogs/<%= blogs[i].slug %>">View Details</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <% } %>
+                      <% } %>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <%- include('../templates/site/_footer') %>
+
+  </body>
+
+  </html>

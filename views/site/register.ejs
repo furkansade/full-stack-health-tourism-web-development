@@ -1,0 +1,158 @@
+<%- include("../templates/site/_header") %>
+
+    <body class="host_version">
+
+        <%- include("../templates/site/_loader") %>
+
+
+            <%- include("../templates/site/_navbar") %>
+
+
+                <div class="container">
+                    <div class="section-title text-center">
+                        <h3 class="mt-5">Register Customer</h3>
+
+
+                        <% if(flashMessages) { %>
+
+                            <% if(flashMessages.success) { %>
+                                <div class="alert alert-success" role="alert">
+                                    <%= flashMessages.success %>
+                                </div>
+                                <% } %>
+
+                                    <% if(flashMessages.error) { %>
+                                        <div class="alert alert-danger" role="alert">
+                                            <%= flashMessages.error %>
+                                        </div>
+                                        <% } %>
+
+                                            <% } %>
+
+                                                <div class="row">
+
+
+                                                    <div class="col-xl-12 col-md-12 col-sm-12">
+                                                        <div class="contact_form rounded"
+                                                            style="background-color: #4c5a7d;">
+
+                                                            <div id="message"></div>
+
+                                                            <form method="POST" action="/users/signup"
+                                                                enctype="multipart/form-data">
+
+                                                                <div class="form-row">
+
+                                                                    <div class="form-group col-md-3">
+                                                                        <select class="form-control" name="role"
+                                                                            id="role">
+                                                                            <option value="Customer">Customer</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-9">
+                                                                        <input type="text" name="name" id="name"
+                                                                            class="form-control"
+                                                                            placeholder="Full Name">
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                                <div class="form-row">
+
+                                                                    <div class="form-group col-md-6">
+                                                                        <input type="text" name="address" id="address"
+                                                                            class="form-control" placeholder="Address"
+                                                                            required>
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-3">
+                                                                        <input type="text" name="city" id="city"
+                                                                            class="form-control" placeholder="City"
+                                                                            required>
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-3">
+                                                                        <input type="text" name="country" id="country"
+                                                                            class="form-control" placeholder="Country"
+                                                                            required>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="form-row">
+
+                                                                    <div class="form-group col-md-7">
+                                                                        <input type="file" name="logoImage"
+                                                                            id="logoImage" class="form-control"
+                                                                            required>
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-5">
+                                                                        <input type="text" pattern="\d*" name="phone"
+                                                                            id="phone" class="form-control"
+                                                                            maxlength="10"
+                                                                            placeholder="Phone Number(10 Digit)"
+                                                                            required>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="form-row">
+
+
+                                                                    <div class="form-group col-md-6">
+                                                                        <input type="email" name="mail" id="mail"
+                                                                            class="form-control" placeholder="Email">
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-3">
+                                                                        <input type="password" name="password"
+                                                                            id="password" class="form-control"
+                                                                            placeholder="Password">
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-3">
+                                                                        <input type="password" class="form-control"
+                                                                            placeholder="Confirm Password" disabled>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <button type="submit"
+                                                                            class="btn btn-outline-light btn-lg">Sign
+                                                                            up!</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <a href="/register/company"
+                                                                        class="btn btn-outline-dark btn-sm float-right">Company</a>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div><!-- end col -->
+                                                </div><!-- end row -->
+                    </div><!-- end container -->
+                </div><!-- end container -->
+
+
+                <%- include("../templates/site/_footer") %>
+
+                    <script>
+                        timeline(document.querySelectorAll('.timeline'), {
+                            forceVerticalMode: 700,
+                            mode: 'horizontal',
+                            verticalStartPosition: 'left',
+                            visibleItems: 4
+                        });
+                    </script>
+    </body>
+
+    </html>

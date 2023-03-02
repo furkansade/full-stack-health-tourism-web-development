@@ -1,0 +1,53 @@
+<%- include('../templates/site/_header') -%>
+
+<body class="host_version"> 
+
+    <%- include('../templates/site/_loader') -%>
+
+	
+	<%- include('../templates/site/_navbar') -%>
+	
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>Health Companies<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+		</div>
+	</div>
+	
+	<div id="teachers" class="section wb">
+        <div class="container">
+            <div class="row">
+
+							
+							<% for(let i = 0; i < companies.length; i++) { %>
+								
+								<div class="col-lg-3 col-md-6 col-12">
+									<div class="our-team">
+										<div class="team-img">
+											<a href="/company/<%= companies[i].slug %>">
+												<img src="<%= companies[i].logoImage %>" class="rounded-top">
+												<div class="social">
+												</div>
+											</a>
+										</div>
+										<div class="team-content rounded-bottom">
+											<a href="/company/<%= companies[i].slug %>">
+												<h3 style="text-transform: capitalize;"><%= companies[i].name %></h3>
+											</a>
+											<span class="post"><%= companies[i].mail %> | <%= companies[i].city %></span>
+										</div>
+									</div>
+								</div>
+									
+							<% } %>
+		
+
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->	
+
+    
+
+		<%- include('../templates/site/_footer') -%>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<%- include('../templates/site/_header') %>
+
+	<body class="host_version">
+
+		<%- include('../templates/site/_loader') %>
+
+
+			<%- include('../templates/site/_navbar') %>
+
+
+
+
+				<div id="overviews" class="section wb">
+					<div class="container">
+						<div class="row">
+
+							<div class="offset-2 col-lg-8 col-md-8 col-8 mb-4 border py-2">
+								<div class="row">
+
+									<div class="col-4">
+										<img src="<%= company.logoImage %>" style="max-width: 25vh; height: auto;" class="float-left">
+									</div>
+
+									<div class="col-8 text-center">
+
+										<h1>
+											<%= company.name %>
+										</h1>
+
+										<div class="row mt-3">
+											<div class="col-6">
+												<h3>0(<%= company.phone.substring(0,3) %>) <%= company.phone.substring(3,6) %>
+															<%= company.phone.substring(6,8) %>
+																<%= company.phone.substring(8,10) %>
+												</h3>
+											</div>
+
+											<div class="col-6">
+												<% if(company.webUrl != "") { %>
+												<h3>
+													<a href="#" target="_blank">
+														Company Web Site
+													</a>
+												</h3>
+												<% } else { %>
+													<h3>
+														<a href="#" target="_blank">
+															-
+														</a>
+													</h3>
+													<% } %>
+											</div>
+										</div>
+										<div class="row mt-3">
+											<div class="col-6">
+												<h3>
+													<%= company.city %> | <%= company.country %>
+												</h3>
+											</div>
+
+											<div class="col-6">
+												<h3>
+													<%= company.mail %>
+												</h3>
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+
+							<div class="col-lg-12 col-md-12 col-12 mt-4 text-center">
+								<h2 class="mb-4"><%= company.name %> | Health Packages</h2>
+
+
+								<div class="row">
+
+
+									<% for(let i=0; i < healthPackages.length; i++) { %>
+										<% if(healthPackages[i].user.slug===company.slug) { %>
+
+											<div class="col-lg-4 col-md-4 col-6">
+
+												<div class="course-item mb-5">
+
+													<div class="image-blog">
+														<a href="/healthpackages/<%= healthPackages[i].slug %>">
+															<img src="<%= healthPackages[i].image %>" alt="" style="height: 35vh" class="rounded-top img-fluid">
+														</a>
+													</div>
+
+													<div class="course-br">
+
+														<div class="course-title">
+															<h2>
+																<a href="/healthpackages/<%= healthPackages[i].slug %>" title=""><%= healthPackages[i].title %></a>
+															</h2>
+														</div>
+
+
+
+														<div class="course-desc">
+															<p><%= healthPackages[i].description.substring(0,100) + '...' %></p>
+
+															<% if(healthPackages[i].category !=null) { %>
+																<div class="text-center">								
+																	<a href="/healthpackages?categories=<%= healthPackages[i].category.slug %>" class="btn btn-sm btn-outline-primary"><%= healthPackages[i].category.name %></a>
+															</div>
+																<% } else { %>
+																	
+																		<div class="text-center">								
+																			<a href="#" class="btn btn-sm btn-outline-primary"> - </a>
+																	</div>
+																	
+																	<% } %>
+
+
+														</div>
+
+													</div>
+
+													<div class="course-meta-bot rounded-bottom">
+														<ul>
+
+															<li>
+																<a href="#" class="btn btn-outline-success">
+																	<i class="bi bi-tag" aria-hidden="true"></i>
+																	<strong><%= healthPackages[i].newPrice %>€</strong>
+																</a>
+															</li>
+														</ul>
+													</div>
+
+												</div>
+
+											</div><!-- end col -->
+
+											<% } %>
+												<% } %>
+
+
+								</div><!-- end row -->
+							</div>
+
+						</div><!-- end row -->
+					</div><!-- end container -->
+				</div><!-- end section -->
+
+				<%- include('../templates/site/_footer') %>
+
+	</body>
+
+	</html>

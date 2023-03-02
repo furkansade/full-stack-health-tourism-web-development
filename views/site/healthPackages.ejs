@@ -1,0 +1,151 @@
+<%- include('../templates/site/_header') -%>
+
+<body class="host_version"> 
+
+    <%- include('../templates/site/_loader') -%>
+
+	
+	<%- include('../templates/site/_navbar') -%>
+
+	
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>Health Packages<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+		</div>
+	</div>
+	
+    <div id="overviews" class="section wb">
+
+        <div class="container">
+
+            <div class="row"> 
+
+                <div class="col-lg-9 blog-post-single">
+
+				            <div class="row"> 
+
+											<% for(let i = 0; i < healthPackages.length; i++) { %>
+
+											<div class="col-lg-6 col-md-6 col-12">
+
+												<div class="course-item mb-5">
+
+													<div class="image-blog">
+														<a href="/healthpackages/<%= healthPackages[i].slug %>">
+															<img src="<%= healthPackages[i].image %>" alt="" style="height: 35vh" class="rounded-top img-fluid">
+														</a>
+													</div>
+
+													<div class="course-br">
+														
+														<div class="course-title">
+															<h2>
+																<a href="/healthpackages/<%= healthPackages[i].slug %>" title=""><%= healthPackages[i].title %></a>
+															</h2>
+														</div>
+
+														
+
+														<div class="course-desc">
+															<p><%= healthPackages[i].description.substring(0, 100) + '...' %> </p>
+
+															<% if(healthPackages[i].category !=null) { %>
+																<div class="text-center">								
+																	<a href="/healthpackages?categories=<%= healthPackages[i].category.slug %>" class="btn btn-sm btn-outline-primary"><%= healthPackages[i].category.name %></a>
+															</div>
+																<% } else { %>
+																	
+																		<div class="text-center">								
+																			<a href="#" class="btn btn-sm btn-outline-primary"> - </a>
+																	</div>
+																	
+																	<% } %>
+															
+
+
+
+
+
+														</div>
+
+													</div>
+
+													<div class="course-meta-bot rounded-bottom">
+												<ul>
+													<li>
+														<a href="/company/<%= healthPackages[i].user.slug %>" class="btn btn-outline-dark my-2" style="text-transform: capitalize;">
+															<i class="bi bi-hospital" aria-hidden="true"></i>
+															<%= healthPackages[i].user.name %>
+														</a>
+													</li>
+													<li>
+														<a href="/healthpackages/<%= healthPackages[i].slug %>" class="btn btn-outline-success">
+															<i class="bi bi-tag" aria-hidden="true"></i>
+															<strong><%= healthPackages[i].newPrice %>€</strong>
+														</a>
+													</li>
+												</ul>
+													</div>
+
+												</div>
+
+											</div><!-- end col -->
+
+											<% } %>
+											
+
+            				</div><!-- end row -->
+					
+                </div><!-- end col -->
+
+								<div class="col-lg-3 col-12 right-single">
+									<div class="widget-search">
+										<div class="site-search-area">
+											<form method="GET" id="site-searchform" action="/healthpackages">
+												<div>
+													<input class="input-text form-control" name="search" id="search-k"
+														placeholder="Search..." type="text">
+													<button id="searchsubmit" value="Search" type="submit"></button>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="widget-categories">
+										<h3 class="widget-title">Categories</h3>
+										<ul>
+											<% for(let i = 0; i < categories.length; i++) { %>
+
+												<li>
+													<a href="/healthpackages?categories=<%= categories[i].slug %>" style="text-transform: capitalize;"><%= categories[i].name %></a>
+												</li>
+
+											<% } %>
+											<li><a href="/healthpackages">All Categories</a></li>
+										</ul>
+									</div>
+
+									<div class="widget-categories">
+										<h3 class="widget-title">Companies</h3>
+										<ul>
+											<% for(let i = 0; i < companies.length; i++) { %>
+
+												<li>
+													<a href="/company/<%= companies[i].slug %>" style="text-transform: capitalize;"><%= companies[i].name %></a>
+												</li>
+
+											<% } %>
+										</ul>
+									</div>
+								</div>
+
+            </div><!-- end row -->
+
+        </div><!-- end container -->
+
+    </div><!-- end section -->
+
+
+    <%- include('../templates/site/_footer') -%>
+
+</body>
+</html>

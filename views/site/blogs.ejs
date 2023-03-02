@@ -1,0 +1,93 @@
+<%- include('../templates/site/_header') -%>
+
+<body class="host_version"> 
+
+    <%- include('../templates/site/_loader') -%>
+
+	
+	<%- include('../templates/site/_navbar') -%>
+
+	
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>Blogs<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+		</div>
+	</div>
+	
+
+  <div id="overviews" class="section wb">
+
+    <div class="container">
+
+        <div class="row"> 
+
+            <div class="col-lg-9 blog-post-single">
+
+                <div class="row"> 
+
+                  <% for(let i = 0; i < blogs.length; i++) { %>
+
+                  <div class="col-lg-12 col-md-12 col-12">
+                    <div class="card mb-3">
+                      <div class="row no-gutters">
+                        <div class="col-md-5 image-blog">
+                          <a href="/blogs/<%= blogs[i].slug %>">
+                            <img src="<%= blogs[i].image %>" style="height: 30vh;" class="card-img img-fluid" height="100%" alt="...">
+                          </a>
+                        </div>
+                        <div class="col-md-7">
+                          <div class="card-body course-title">
+                            <a href="/blogs/<%= blogs[i].slug %>">
+                              <h3 class="card-title"><%= blogs[i].title %></h3>
+                            </a>
+                            <p class="card-text" style="text-transform: capitalize;"><%= blogs[i].description.substring(10,260) + '...' %></p>
+                            <p class="card-text"><small class="text-muted"><%= blogs[i].category.name %></small></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>       
+                  </div>
+
+                    <% } %>
+
+                  </div>
+                </div>
+      
+            <div class="col-lg-3 col-12 right-single">
+              <div class="widget-search">
+                <div class="site-search-area">
+                  <form method="GET" id="site-searchform" action="/healthpackages">
+                    <div>
+                      <input class="input-text form-control" name="search" id="search-k" placeholder="Search keywords..." type="text">
+                      <button id="searchsubmit" value="Search" type="submit"></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="widget-categories">
+                <h3 class="widget-title">Categories</h3>
+                <ul>
+                  <% for(let i = 0; i < categories.length; i++) { %>
+
+                    <li>
+                      <a href="/blogs?categories=<%= categories[i].slug %>" style="text-transform: capitalize;"><%= categories[i].name %></a>
+                    </li>
+
+                  <% } %>
+                  <li><a href="/blogs">All Categories</a></li>
+                </ul>
+              </div>
+            </div>
+
+        </div><!-- end row -->
+
+    </div><!-- end container -->
+
+</div><!-- end section -->
+
+
+
+    <%- include('../templates/site/_footer') -%>
+
+</body>
+</html>

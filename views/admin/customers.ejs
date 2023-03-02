@@ -1,0 +1,97 @@
+<%- include('../templates/admin/_header') %>
+
+  <body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+      <%- include('../templates/admin/_sidebar') %>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+          <!-- Main Content -->
+          <div id="content">
+
+            <%- include('../templates/admin/_navbar') %>
+
+              <% if(adminUser) { %>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                  <!-- Page Heading -->
+                  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard | Customers</h1>
+                    <a href="/register" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> New Customer!</a>
+                  </div>
+
+
+                  <!-- Content Row -->
+                  <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-12 mb-4">
+
+                      <!-- Project Card Example -->
+                      <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Customers</h6>
+                        </div>
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Customer Avatar</th>
+                              <th scope="col">Customer Full Name</th>
+                              <th scope="col">Customer Mail</th>
+                              <th scope="col">Customer From</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% for(let i=0; i < customers.length; i++) { %>
+                              <tr>
+                                <th scope="row"><%= customers[i]._id %></th>
+                                <td>
+                                  <img width="80px" src="<%= customers[i].logoImage %>" alt="">
+                                </td>
+                                <td><%= customers[i].name %></td>
+                                <td><%= customers[i].mail %></td>
+                                <td><%= customers[i].city %> | <%= customers[i].country %></td>
+                                <td>
+                                  <a href="/users/<%= customers[i]._id %>?_method=DELETE" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger">
+                                    <i class="bi bi-trash3"></i>
+                                  </a>
+                                </td>
+
+                              </tr>
+                              <% } %>
+
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+
+
+
+
+                  </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+          </div>
+          <!-- End of Main Content -->
+
+
+
+          <% } %>
+
+            <%- include('../templates/admin/_footer') %>
+
+
+  </body>
+
+  </html>

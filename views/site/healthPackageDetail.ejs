@@ -1,0 +1,295 @@
+<%- include('../templates/site/_header') %>
+
+	<body class="host_version">
+
+		<%- include('../templates/site/_loader') %>
+
+
+			<%- include('../templates/site/_navbar') %>
+
+				<div class="all-title-box">
+					<div class="container text-center">
+						<h1>
+							<%= healthPackage.title %><span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span>
+						</h1>
+					</div>
+				</div>
+
+				<div id="overviews" class="section wb">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-lg-9 blog-post-single mb-4">
+								<div class="blog-item">
+									<div class="image-blog">
+										<img src="<%= healthPackage.image %>"  alt="" class="img-fluid">
+									</div>
+									
+									<% if(healthPackage.category !=null) { %>
+
+										<div class="post-content">
+											<div class="post-date">
+												<a href="/healthpackages?categories=<%= healthPackage.category.slug %>" style="text-transform: capitalize;" class="btn btn-info">
+													<%= healthPackage.category.name %>
+												</a>
+											</div>
+											
+											<% } else { %>
+												<div class="post-content">
+													<div class="post-date">
+														<a href="#" style="text-transform: capitalize;" class="btn btn-info">
+															-
+														</a>
+													</div>
+											<% } %>
+
+										<% if(user && !(user.healthPackages.includes(healthPackage._id))) { %>
+											<div class="post-date mx-2">
+												<form method="POST" action="/healthpackages/enroll">
+													<input type="hidden" name="healthPackage_id" value="<%= healthPackage._id %>">
+													<button class="btn btn-outline-danger">
+														<i class="bi bi-heart-fill"></i>
+													</button>
+												</form>
+											</div>
+											<% } %>
+												<div class="meta-info-blog">
+													<span><i class="fa fa-calendar"></i> <a href="#">
+														<%= healthPackage.createdDate.getDate() %>.<%= healthPackage.createdDate.getMonth() + 1 %>.<%= healthPackage.createdDate.getFullYear() %>
+														</a> </span>
+												</div>
+												<div class="blog-title">
+													<h2><a href="#" title="">
+															<%= healthPackage.title %>
+														</a></h2>
+												</div>
+
+									</div>
+								</div>
+
+
+
+							</div><!-- end col -->
+
+							<div class="col-lg-3 col-12 right-single">
+
+								<div class="card" style="width: 18rem;">
+									<a href="/company/<%= healthPackage.user.slug %>" style="width: 15rem; margin: auto; margin-top: 2rem;">
+										<img class="card-img-top" src="<%= healthPackage.user.logoImage %>" alt="Card image cap">
+									</a>
+
+									<div class="card-body">
+										<hr>
+										<h3 class="text-center" style="text-transform: capitalize;">
+											<%= healthPackage.user.name %>
+										</h3>
+										<a href="/company/<%= healthPackage.user.slug %>" class="btn btn-danger mb-2">
+											<i class="bi bi-hospital"></i>
+											Review Order Packages
+										</a>
+										<% if(healthPackage.doctorUrl !="" ) { %>
+											<a href="<%= healthPackage.doctorUrl %>" target="_blank" class="btn btn-danger">
+												<i class="bi bi-person"></i>
+												DoktorUzman Profile
+											</a>
+											<% } %>
+									</div>
+								</div>
+								<div class="card text-right mt-4 mb-5" style="width: 18rem;">
+									<div class="card-header text-left" style="background-color: #fff;">
+
+										<input type="hidden" name="healthPackage_id" value="<%= healthPackage._id %>">
+										<button class="btn btn-lg btn-outline-primary mt-1 mb-1 mx-3">
+											<i class="bi bi-tag"></i>
+											<%= healthPackage.newPrice %>€
+										</button>
+
+										<% if(healthPackage.oldPrice > healthPackage.newPrice ) { %>
+										<span class="btn btn-sm btn-outline-danger mt-1 mb-1 text-right disabled">
+											<i class="bi bi-tag"></i>
+											<%= healthPackage.oldPrice %>€
+										</span>
+										<% } %>
+
+								
+
+									</div>
+
+
+								</div>
+							</div><!-- end row -->
+
+							<div class="row mb-5">
+								<div class="col">
+									<ul class="nav nav-tabs" id="myTab" role="tablist">
+										<li class="nav-item" role="presentation">
+											<a class="nav-link active" style="color: #007bff; cursor: pointer;" id="Tinfo" data-bs-toggle="tab"
+												data-bs-target="#info" role="tab" aria-controls="info" aria-selected="true">Information</a>
+										</li>
+										<li class="nav-item" role="presentation">
+											<a class="nav-link" style="color: #007bff; cursor: pointer;" id="Tacc" data-bs-toggle="tab" data-bs-target="#acc"
+												role="tab" aria-controls="acc" aria-selected="false">Acommodation</a>
+										</li>
+										<li class="nav-item" role="presentation">
+											<a class="nav-link" style="color: #007bff; cursor: pointer;" id="Tprice" data-bs-toggle="tab"
+												data-bs-target="#price" role="tab" aria-controls="price" aria-selected="false">Price</a>
+										</li>
+										<li class="nav-item" role="presentation">
+											<a class="nav-link" style="color: #007bff; cursor: pointer;" id="Tloc" data-bs-toggle="tab" data-bs-target="#loc"
+												role="tab" aria-controls="loc" aria-selected="false">Location</a>
+										</li>
+									</ul>
+									<div class="tab-content mt-3">
+
+										<div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="Tinfo">
+											<h3 class="display-4">Information</h3>
+											<p class="text-muted">
+												<%= healthPackage.description %>
+											</p>
+										</div>
+
+										<div class="tab-pane fade" id="acc" role="tabpanel" aria-labelledby="Tacc">
+	
+												<div class="row">
+
+													<div class="col-md-6 col-lg-6 col-12">
+														<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+															<div class="carousel-inner">
+																<div class="carousel-item active">
+																	<img class="d-block w-100 rounded" src="<%= healthPackage.hotel.image %>" alt="First slide">
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-6 col-lg-6 col-12">
+														<h3 class="display-4">
+															<%= healthPackage.hotel.name %>
+														</h3>
+														<p>
+															<strong>City: </strong>
+															<%= healthPackage.hotel.city %>
+														</p>
+														<p>
+															<%= healthPackage.hotel.description %>
+														</p>
+														<p>
+		
+															<a href="<%= healthPackage.hotel.webUrl %>" target="_blank"><strong>Web Site: </strong>
+																<%= healthPackage.hotel.name %>
+															</a>
+														</p>
+													</div>
+
+												</div>
+
+										</div>
+
+										<div class="tab-pane fade" id="price" role="tabpanel" aria-labelledby="Tprice">
+											<h3 class="display-4">Price</h3>
+											<p class="text-muted">
+												<%= healthPackage.newPrice %>
+
+											</p>
+										</div>
+
+										<div class="tab-pane fade" id="loc" role="tabpanel" aria-labelledby="Tloc">
+											<h3 class="display-4">Location</h3>
+											<p class="text-muted">
+												<%= healthPackage.address %> | <%= healthPackage.city %> | <%= healthPackage.country %> |
+
+											</p>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+						</div><!-- end container -->
+					</div><!-- end section -->
+
+					<!-- Related items section-->
+					<div class="row py-5 bg-light">
+						<div class="container px-4 px-lg-5 mt-5">
+							<h2 class="fw-bolder mb-4">Other Health Packages</h2>
+							<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-left">
+
+								<% for(let i=0; i < healthPackages.length; i++) { %>
+									<% if(healthPackage.slug !=healthPackages[i].slug) { %>
+										<div class="col-4 mb-5">
+											<div class="card h-100">
+												<!-- Sale badge-->
+
+												<% if(healthPackages[i].category !=null) { %>
+													<div class="badge position-absolute" style="top: 0.3rem; right: 0.3rem">
+														<a href="/healthpackages?categories=<%= healthPackages[i].category.slug %>" class="btn btn-sm btn-info">
+															<%= healthPackages[i].category.name %>
+														</a>
+													</div>
+													
+													<% } else { %>
+														<div class="badge position-absolute" style="top: 0.3rem; right: 0.3rem">
+															<a href="#" class="btn btn-sm btn-info">
+																-
+															</a>
+														</div>
+														
+														<% } %>
+
+
+
+
+
+												<!-- Product image-->
+												<a href="/healthpackages/<%= healthPackages[i].slug %>">
+													<img class="card-img-top" src="<%= healthPackages[i].image %>" style="height: 30vh;" alt="..." />
+												</a>
+												<!-- Product details-->
+												<div class="card-body p-4">
+													<div class="text-center">
+														<!-- Product name-->
+														<a href="/healthpackages/<%= healthPackages[i].slug %>"
+															style="text-decoration: none; color: black;">
+															<h3 class="fw-bolder">
+																<%= healthPackages[i].title %>
+															</h3>
+														</a>
+														<!-- Product reviews-->
+														<div class="d-flex justify-content-center small text-warning mb-2">
+															<div class="bi-star-fill"></div>
+															<div class="bi-star-fill"></div>
+															<div class="bi-star-fill"></div>
+															<div class="bi-star-fill"></div>
+															<div class="bi-star-fill"></div>
+														</div>
+														<!-- Product price-->
+														<span class="btn btn-lg btn-outline-primary" id="smallTitle">
+															<%= healthPackages[i].newPrice %>€
+														</span>
+
+														<% if(!healthPackage.oldPrice) { %>
+														<span class="btn btn-sm btn-outline-danger disabled" tabindex="-1">
+															<%= healthPackages[i].oldPrice %>€
+														</span>
+														<% } %>
+
+													</div>
+												</div>
+												
+											</div>
+										</div>
+										<% } %>
+											<% } %>
+
+							</div>
+						</div>
+					</div>
+
+
+
+					<%- include('../templates/site/_footer') %>
+
+	</body>
+
+	</html>
