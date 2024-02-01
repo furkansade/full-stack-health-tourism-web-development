@@ -17,17 +17,6 @@ Sağlık şirketlerinin sağlık paketleri ekleyebileceği, müştelerin ise üy
 - Şifreleme işlemi için **bcrypt** paketi kullanıldı.
 - Tasarım **Bootstrap** ile yaratıldı.
 
-### Projede Kullanılan Önemli Paketler
-
-| Paket | Yükleme |
-| ------ | ------ |
-| express | npm i express |
-| ejs | npm i ejs |
-| mongoose | npm i mongoose |
-| slugify | npm i slugify |
-| flash | npm i connect-flash |
-| mongo-store | npm i mongo-store |
-| bcrypt | npm i bcrypt |
 
 
 
